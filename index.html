@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Citrus Heights Rage Room, Axe Throwing &amp; Splatter Paint | Smash Sacramento</title>
+<meta name="description" content="Sacramento's premiere rage room in Citrus Heights. Smash, throw axes, and splatter paint. Great for groups up to 50. Book online today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0B0B;
+    --surface:#171212;
+    --surface-2:#1F1818;
+    --line:#2C2322;
+    --red:#F0202E;
+    --red-deep:#B00C18;
+    --hazard:#FFD400;
+    --paper:#F4EFEA;
+    --muted:#A6968F;
+    --r:14px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .mono{font-family:'Space Mono',monospace}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--hazard);
+  }
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.01em}
+
+  /* caution tape */
+  .hazard-strip{
+    height:10px;
+    background:repeating-linear-gradient(45deg,var(--hazard) 0 18px,#0E0B0B 18px 36px);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(14,11,11,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Anton',sans-serif;font-size:1.35rem;letter-spacing:.02em}
+  .brand .spark{color:var(--red)}
+  .nav-links{display:none;gap:30px;align-items:center}
+  .nav-links a{font-size:.9rem;font-weight:600;color:var(--paper);opacity:.85;transition:opacity .2s}
+  .nav-links a:hover{opacity:1;color:var(--hazard)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--red);color:#fff;font-weight:700;font-size:.9rem;
+    padding:11px 20px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .15s, background .2s;
+  }
+  .nav-cta:hover{background:var(--red-deep);transform:translateY(-1px)}
+  .burger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2px;background:var(--paper);transition:.25s}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  .mobile-menu{
+    position:fixed;inset:68px 0 auto 0;z-index:55;
+    background:var(--surface);border-bottom:1px solid var(--line);
+    transform:translateY(-120%);transition:transform .3s ease;
+    padding:14px 22px 26px;
+  }
+  .mobile-menu.open{transform:translateY(0)}
+  .mobile-menu a{display:block;padding:13px 0;border-bottom:1px solid var(--line);font-weight:600}
+  .mobile-menu .nav-cta{display:flex;justify-content:center;margin-top:18px;width:100%}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:64px 0 56px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(900px 500px at 78% -10%, rgba(240,32,46,.22), transparent 60%),
+      radial-gradient(600px 400px at 0% 120%, rgba(255,212,0,.10), transparent 55%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero-tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px}
+  .pin{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--hazard);box-shadow:0 0 0 4px rgba(255,212,0,.18)}
+  .hero h1{
+    font-size:clamp(3.4rem,13vw,8.5rem);
+    letter-spacing:.005em;
+  }
+  .hero h1 .smash{color:var(--red);display:block}
+  .hero h1 .it{
+    color:transparent;-webkit-text-stroke:2px var(--paper);
+  }
+  .hero-sub{
+    max-width:540px;margin:22px 0 30px;font-size:1.12rem;color:#D8CEC8;
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-weight:700;border-radius:999px;cursor:pointer;border:none;
+    padding:16px 30px;font-size:1rem;transition:transform .15s,background .2s,border-color .2s;
+  }
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{background:var(--red-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--paper);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--hazard);color:var(--hazard)}
+
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;
+    font-family:'Space Mono',monospace;font-size:.82rem;color:var(--muted);
+  }
+  .hero-meta b{color:var(--paper);font-weight:700}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--surface);overflow:hidden;white-space:nowrap;padding:16px 0;
+  }
+  .marquee-track{display:inline-flex;gap:42px;animation:scroll 28s linear infinite;font-family:'Anton',sans-serif;font-size:1.3rem;text-transform:uppercase;letter-spacing:.04em}
+  .marquee-track span{color:var(--muted)}
+  .marquee-track span .d{color:var(--red);margin-left:42px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:78px 0}
+  .sec-head{margin-bottom:46px;max-width:680px}
+  .sec-head h2{font-size:clamp(2.2rem,6vw,3.6rem);margin:14px 0 12px}
+  .sec-head p{color:var(--muted);font-size:1.05rem}
+
+  /* ---------- EXPERIENCES ---------- */
+  .exp-grid{display:grid;grid-template-columns:1fr;gap:18px}
+  .exp{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:30px 26px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;
+  }
+  .exp:hover{border-color:var(--red);transform:translateY(-3px)}
+  .exp .num{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted)}
+  .exp h3{font-size:1.7rem;margin:14px 0 10px}
+  .exp p{color:#CdBfB8;color:#CBBDB6;font-size:.97rem}
+  .exp .icon{font-size:1.9rem;line-height:1}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{background:var(--surface)}
+  .steps{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:26px 24px;border-bottom:1px solid var(--line);align-items:start}
+  .step:last-child{border-bottom:none}
+  .step .n{font-family:'Anton',sans-serif;font-size:2.4rem;color:var(--red);line-height:1}
+  .step h3{font-size:1.25rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.95rem}
+  .step a{color:var(--hazard);text-decoration:underline;text-underline-offset:3px;word-break:break-word}
+
+  /* ---------- PACKAGES ---------- */
+  .pkg-grid{display:grid;grid-template-columns:1fr;gap:20px}
+  .pkg{
+    background:linear-gradient(180deg,var(--surface-2),var(--surface));
+    border:1px solid var(--line);border-radius:18px;padding:28px 26px 26px;
+    display:flex;flex-direction:column;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s;
+  }
+  .pkg:hover{transform:translateY(-4px);border-color:#4a3a39}
+  .pkg.feat{border-color:var(--red);box-shadow:0 0 0 1px var(--red), 0 24px 60px -28px rgba(240,32,46,.6)}
+  .ribbon{
+    position:absolute;top:0;right:22px;transform:translateY(-50%);
+    font-family:'Space Mono',monospace;font-weight:700;font-size:.68rem;letter-spacing:.18em;
+    color:#0E0B0B;padding:8px 14px;border-radius:6px;
+    background:var(--hazard);
+    text-transform:uppercase;display:flex;align-items:center;gap:8px;
+    box-shadow:0 6px 18px -6px rgba(0,0,0,.6);
+    border-top:3px solid #0E0B0B;
+  }
+  .ribbon i{color:var(--red);font-style:normal;font-size:.8rem}
+  .pkg .kind{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .pkg h3{font-size:2rem;margin:8px 0 4px}
+  .price{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+  .price .amt{font-family:'Anton',sans-serif;font-size:2.6rem;color:var(--hazard)}
+  .price .per{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted)}
+  .pkg .limited{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--red);margin-bottom:14px}
+  .pkg ul{list-style:none;margin:16px 0 22px;display:flex;flex-direction:column;gap:11px}
+  .pkg li{display:flex;gap:11px;font-size:.95rem;color:#D8CEC8}
+  .pkg li::before{content:"";flex:none;width:14px;height:14px;margin-top:5px;background:var(--red);clip-path:polygon(50% 0,100% 38%,82% 100%,18% 100%,0 38%)}
+  .pkg .foot{margin-top:auto}
+  .pkg .btn{width:100%;padding:14px}
+  .axe-times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .axe-times a{
+    text-align:center;font-family:'Space Mono',monospace;font-weight:700;font-size:.82rem;
+    padding:12px 4px;border:1.5px solid var(--line);border-radius:10px;transition:.2s;
+  }
+  .axe-times a:hover{border-color:var(--red);background:var(--red);color:#fff}
+
+  /* ---------- GROUPS CTA ---------- */
+  .groups{position:relative;overflow:hidden}
+  .groups-card{
+    background:linear-gradient(135deg,var(--red-deep),#7c0510);
+    border-radius:22px;padding:clamp(34px,6vw,64px);position:relative;overflow:hidden;
+  }
+  .groups-card::after{
+    content:"";position:absolute;right:-40px;bottom:-40px;width:280px;height:280px;
+    background:repeating-linear-gradient(45deg,rgba(255,212,0,.16) 0 16px,transparent 16px 32px);
+    border-radius:50%;
+  }
+  .groups-card .inner{position:relative;z-index:1;max-width:620px}
+  .groups-card h2{font-size:clamp(2rem,5.5vw,3.2rem);margin:12px 0 14px}
+  .groups-card p{font-size:1.08rem;margin-bottom:26px}
+  .groups-card .eyebrow{color:#0E0B0B;background:var(--hazard);display:inline-block;padding:5px 12px;border-radius:5px;letter-spacing:.18em}
+  .groups-actions{display:flex;flex-wrap:wrap;gap:14px}
+  .groups .btn-primary{background:#0E0B0B}
+  .groups .btn-primary:hover{background:#000}
+  .groups .btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+  .groups .btn-ghost:hover{border-color:var(--hazard);color:var(--hazard)}
+
+  /* ---------- VISIT / FOOTER ---------- */
+  .visit{background:var(--surface);border-top:1px solid var(--line)}
+  .visit-grid{display:grid;grid-template-columns:1fr;gap:38px}
+  .visit h3{font-size:1.5rem;margin-bottom:16px;color:var(--paper)}
+  .info-row{display:flex;gap:12px;margin-bottom:14px;font-size:.97rem;color:#D8CEC8}
+  .info-row .lbl{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);min-width:74px;padding-top:2px}
+  .info-row a{color:var(--hazard)}
+  .hours-table{width:100%;border-collapse:collapse;font-size:.95rem}
+  .hours-table td{padding:9px 0;border-bottom:1px solid var(--line)}
+  .hours-table td:first-child{color:var(--muted);font-family:'Space Mono',monospace;font-size:.82rem}
+  .hours-table td:last-child{text-align:right;font-weight:600}
+  .note{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--red);margin-top:14px}
+
+  footer{border-top:1px solid var(--line);padding:36px 0}
+  .foot-flex{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+  .foot-brand{font-family:'Anton',sans-serif;font-size:1.4rem}
+  .foot-brand .spark{color:var(--red)}
+  .socials{display:flex;gap:12px}
+  .socials a{
+    width:42px;height:42px;border:1px solid var(--line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;transition:.2s;color:var(--paper);
+  }
+  .socials a:hover{border-color:var(--hazard);color:var(--hazard)}
+  .foot-bottom{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);font-family:'Space Mono',monospace}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(min-width:640px){
+    .exp-grid{grid-template-columns:1fr 1fr}
+    .pkg-grid{grid-template-columns:1fr 1fr}
+    .foot-flex{flex-direction:row;justify-content:space-between;align-items:center;width:100%}
+  }
+  @media(min-width:768px){
+    .visit-grid{grid-template-columns:1.1fr 1fr}
+    .step{grid-template-columns:72px 1fr}
+  }
+  @media(min-width:980px){
+    .nav-links{display:flex}
+    .burger{display:none}
+    .exp-grid{grid-template-columns:repeat(4,1fr)}
+    .pkg-grid{grid-template-columns:repeat(3,1fr)}
+    .hero{padding:92px 0 80px}
+    .visit-grid{grid-template-columns:1.2fr 1fr 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="hazard-strip" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">SMASH<span class="spark">.</span>SAC</a>
+    <nav class="nav-links">
+      <a href="#experiences">Experiences</a>
+      <a href="#how">How it works</a>
+      <a href="#packages">Packages</a>
+      <a href="#groups">Groups</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="nav-cta" href="#packages">Book now</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#experiences">Experiences</a>
+  <a href="#how">How it works</a>
+  <a href="#packages">Packages</a>
+  <a href="#groups">Groups &amp; events</a>
+  <a href="#visit">Visit us</a>
+  <a class="nav-cta" href="#packages">Book now</a>
+</div>
+
+<!-- HERO -->
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag reveal">
+      <span class="pin" aria-hidden="true"></span>
+      <span class="eyebrow">Citrus Heights &middot; Sacramento's premiere rage room</span>
+    </div>
+    <h1 class="reveal">
+      <span class="smash">Smash</span>
+      <span class="it">it out.</span>
+    </h1>
+    <p class="hero-sub reveal">
+      Bad day, bad week, bad month — bring it here. Grab safety gear, pick up a bat,
+      and break real glass, electronics, and windshields in a room built for it.
+      Axe throwing and splatter paint, too.
+    </p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="#packages">Pick a package</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+    </div>
+    <div class="hero-meta reveal">
+      <span>Groups up to <b>50</b></span>
+      <span>Ages <b>12+</b></span>
+      <span>Open <b>7 days</b> &middot; reservations required</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Rage Room<i class="d">✦</i></span><span>Axe Throwing<i class="d">✦</i></span>
+    <span>Splatter Paint<i class="d">✦</i></span><span>Team Building<i class="d">✦</i></span>
+    <span>Birthdays<i class="d">✦</i></span><span>Date Night<i class="d">✦</i></span>
+    <span>Rage Room<i class="d">✦</i></span><span>Axe Throwing<i class="d">✦</i></span>
+    <span>Splatter Paint<i class="d">✦</i></span><span>Team Building<i class="d">✦</i></span>
+    <span>Birthdays<i class="d">✦</i></span><span>Date Night<i class="d">✦</i></span>
+  </div>
+</div>
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Four ways to let loose</span>
+      <h2>Pick your kind of chaos</h2>
+      <p>Whether you want to break things, throw sharp things, or make a colorful mess — there's a room for it.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp reveal">
+        <div class="icon">💥</div>
+        <span class="num">01 / Rage Room</span>
+        <h3>Smash It</h3>
+        <p>A safe, welcoming space to relax and let it all out. Real breakables, real release.</p>
+      </div>
+      <div class="exp reveal">
+        <div class="icon">🪓</div>
+        <span class="num">02 / Axe Throwing</span>
+        <h3>Throw It</h3>
+        <p>Your own lane, a 12-foot target, and an axe, knife, and tomahawk. Put your aim to the test.</p>
+      </div>
+      <div class="exp reveal">
+        <div class="icon">🎨</div>
+        <span class="num">03 / Splatter Paint</span>
+        <h3>Spray It</h3>
+        <p>Throw, blast, drip, and flick paint into a one-of-a-kind masterpiece. Fun for all ages, zero cleanup.</p>
+      </div>
+      <div class="exp reveal">
+        <div class="icon">🎉</div>
+        <span class="num">04 / Groups</span>
+        <h3>Bring The Crew</h3>
+        <p>A family adventure with a built-in team-building twist. Great for up to 50 people.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Online reservations required</span>
+      <h2>How it works</h2>
+      <p>Four steps from "I need to break something" to walking out lighter.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="n">1</div>
+        <div>
+          <h3>Pick a package</h3>
+          <p>Choose a rage room or axe throwing package below. Each one sets how much you'll smash.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div>
+          <h3>Choose your group size, then book</h3>
+          <p>Select how many people are coming. You'll land on our scheduling tool to pick a day, time, and pay.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div>
+          <h3>Sign the waiver</h3>
+          <p>Hit the waiver link after booking, or fill it out ahead of time at
+          <a href="https://waiver.smartwaiver.com/w/6073e8870a81f/web/" target="_blank" rel="noopener">our online waiver</a>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <div>
+          <h3>Arrive 10 minutes early</h3>
+          <p>Wear closed-toed shoes and bring your completed waiver. We'll hand you safety gear and weapons before you go in — the room's already loaded with breakables.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Rage room &middot; axe throwing &middot; paint</span>
+      <h2>Choose your package</h2>
+      <p>Prices are per person. Booking for 15 or more? Call <a style="color:var(--hazard)" href="tel:19165488183">(916) 548-8183</a> or email the events team.</p>
+    </div>
+    <div class="pkg-grid">
+
+      <!-- Bad Day -->
+      <div class="pkg reveal">
+        <span class="kind">Rage Room</span>
+        <h3>Bad Day</h3>
+        <div class="price"><span class="amt">$35</span><span class="per">/ person</span></div>
+        <ul>
+          <li>A quick, satisfying smash session</li>
+          <li>Small furniture &amp; electronics to destroy</li>
+          <li>Glass to shatter with a bat</li>
+        </ul>
+        <div class="foot">
+          <a class="btn btn-primary" href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/items/524498/?full-items=yes&flow=1125412" target="_blank" rel="noopener">Book now &middot; 12+</a>
+        </div>
+      </div>
+
+      <!-- Bad Week (featured) -->
+      <div class="pkg feat reveal">
+        <span class="ribbon"><i>★</i> Most Popular</span>
+        <span class="kind">Rage Room</span>
+        <h3>Bad Week</h3>
+        <div class="price"><span class="amt">$55</span><span class="per">/ person</span></div>
+        <ul>
+          <li>Smash a full windshield</li>
+          <li>A larger assortment of breakables</li>
+          <li>Take aim with a paintball gun</li>
+        </ul>
+        <div class="foot">
+          <a class="btn btn-primary" href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/items/593512/?full-items=yes&flow=1125412" target="_blank" rel="noopener">Book now &middot; 12+</a>
+        </div>
+      </div>
+
+      <!-- Bad Month -->
+      <div class="pkg reveal">
+        <span class="kind">Rage Room</span>
+        <h3>Bad Month</h3>
+        <div class="price"><span class="amt">$75</span><span class="per">/ person</span></div>
+        <ul>
+          <li>Multiple windshields to shatter</li>
+          <li>Large items to smash to pieces</li>
+          <li>A mountain of breakables</li>
+        </ul>
+        <div class="foot">
+          <a class="btn btn-primary" href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/items/593513/?full-items=yes&flow=1125412" target="_blank" rel="noopener">Book now &middot; 12+</a>
+        </div>
+      </div>
+
+      <!-- All About the Glass -->
+      <div class="pkg reveal">
+        <span class="kind">Rage Room &middot; Specialty</span>
+        <h3>All About<br>The Glass</h3>
+        <div class="price"><span class="amt">$60</span><span class="per">/ person</span></div>
+        <div class="limited">★ Limited bookings</div>
+        <ul>
+          <li>One full real windshield, per person</li>
+          <li>Paintball gun, loaded and ready</li>
+          <li>Bottles, mirrors, frames &amp; mystery glass</li>
+        </ul>
+        <div class="foot">
+          <a class="btn btn-primary" href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/items/631772/?full-items=yes&flow=1297085" target="_blank" rel="noopener">Book now &middot; 12+</a>
+        </div>
+      </div>
+
+      <!-- Axe Throwing -->
+      <div class="pkg reveal">
+        <span class="kind">Axe Throwing</span>
+        <h3>Axe Lane</h3>
+        <div class="price"><span class="amt">$20</span><span class="per">/ person, per hour</span></div>
+        <ul>
+          <li>Your own lane, target 12 feet out</li>
+          <li>Axe, throwing knife &amp; tomahawk</li>
+          <li>iPad scoring &amp; expert instruction</li>
+        </ul>
+        <div class="foot">
+          <div class="axe-times">
+            <a href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/?full-items=yes&flow=1330791" target="_blank" rel="noopener">30 min</a>
+            <a href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/?full-items=yes&flow=1330792" target="_blank" rel="noopener">1 hour</a>
+            <a href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/?full-items=yes&flow=1330793" target="_blank" rel="noopener">2 hour</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Splatter Paint -->
+      <div class="pkg reveal">
+        <span class="kind">Splatter Paint</span>
+        <h3>Paint Room</h3>
+        <div class="price"><span class="amt">$25</span><span class="per">/ person</span></div>
+        <ul>
+          <li>Throw, blast, drip &amp; flick paint</li>
+          <li>Protective gear &amp; all colors included</li>
+          <li>No experience needed, zero cleanup</li>
+        </ul>
+        <div class="foot">
+          <a class="btn btn-primary" href="https://fareharbor.com/embeds/book/smashsacramento_citrusheights/items/619542/?full-items=yes&flow=1122233" target="_blank" rel="noopener">Book now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GROUPS -->
+<section class="groups" id="groups">
+  <div class="wrap reveal">
+    <div class="groups-card">
+      <div class="inner">
+        <span class="eyebrow">Birthdays &middot; team building &middot; private events</span>
+        <h2>Got a crew? Bring all of them.</h2>
+        <p>We host groups of up to 50 across rage rooms, axe lanes, and the paint room.
+        Perfect for birthdays, team outings, and anything worth celebrating loudly.</p>
+        <div class="groups-actions">
+          <a class="btn btn-primary" href="mailto:smashsacramento.events@gmail.com">Email the events team</a>
+          <a class="btn btn-ghost" href="tel:19165488183">Call (916) 548-8183</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:38px">
+      <span class="eyebrow">Find us</span>
+      <h2>Visit Citrus Heights</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="reveal">
+        <h3>Location &amp; contact</h3>
+        <div class="info-row"><span class="lbl">Address</span>
+          <span>6412 Tupelo Drive, Suite A/B<br>Citrus Heights, CA 95621</span></div>
+        <div class="info-row"><span class="lbl">Phone</span>
+          <a href="tel:19166701139">(916) 670-1139</a></div>
+        <div class="info-row"><span class="lbl">Events</span>
+          <a href="mailto:smashsacramento.events@gmail.com">smashsacramento.events@gmail.com</a></div>
+        <div class="info-row"><span class="lbl">Map</span>
+          <a href="https://www.google.com/maps/place/Smash+Sacramento/@38.6722831,-121.3306493,17z" target="_blank" rel="noopener">Open in Google Maps</a></div>
+      </div>
+      <div class="reveal">
+        <h3>Hours</h3>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>5:00 PM – 10:00 PM</td></tr>
+          <tr><td>Tue – Thu</td><td>12:00 PM – 10:00 PM</td></tr>
+          <tr><td>Fri – Sun</td><td>2:00 PM – 10:00 PM</td></tr>
+        </table>
+        <p class="note">* Online reservations required</p>
+      </div>
+      <div class="reveal">
+        <h3>Before you come</h3>
+        <div class="info-row"><span class="lbl">Wear</span><span>Closed-toed shoes (tennis shoes or boots)</span></div>
+        <div class="info-row"><span class="lbl">Arrive</span><span>10 minutes before your booking</span></div>
+        <div class="info-row"><span class="lbl">Waiver</span>
+          <a href="https://waiver.smartwaiver.com/w/6073e8870a81f/web/" target="_blank" rel="noopener">Sign online before you arrive</a></div>
+        <div class="info-row"><span class="lbl">Ages</span><span>12 and up</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<div class="hazard-strip" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <div class="foot-flex">
+      <div>
+        <div class="foot-brand">SMASH<span class="spark">.</span>SAC <span style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em">CITRUS HEIGHTS</span></div>
+      </div>
+      <div class="socials">
+        <a href="https://www.instagram.com/smashsacramento/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.facebook.com/Smashsacramento/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9z"/></svg>
+        </a>
+        <a href="https://www.yelp.com/biz/smash-sacramento-carmichael" target="_blank" rel="noopener" aria-label="Yelp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11 3v9l-5-3c1-3 3-5 5-6zm2 18v-6l5 3c-1 2-3 3-5 3zm-2 0c-2 0-4-1-5-3l5-3v6zm9-9c0 1 0 2-1 3l-5-3 5-2c1 1 1 1 1 2zM6 12l5 1-5 3c-1-1-1-3 0-4z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © 2026 Smash Sacramento · All rights reserved · Citrus Heights, CA
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  var burger=document.getElementById('burger');
+  var menu=document.getElementById('mobileMenu');
+  burger.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    burger.classList.toggle('open',open);
+    burger.setAttribute('aria-expanded',open);
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){menu.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded',false);});
+  });
+  // scroll reveal
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
